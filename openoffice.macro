@@ -1,0 +1,1113 @@
+Global sTxtCString As String 
+'Global const REST_URL as string = "http://skynet-dev.usersys.redhat.com:8080/TopicIndex/seam/resource/rest"
+Global const REST_URL as string = "http://skynet.usersys.redhat.com:8080/TopicIndex/seam/resource/rest"
+global const NEW_WRITER_DOC_URL = "private:factory/swriter"
+ 
+sub createXMLListing
+		dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+		sourceDocument = ThisComponent
+		document = sourceDocument.CurrentController.Frame
+		
+		'Get the ViewCursor of the current document 
+		oSelections = ThisComponent.getCurrentSelection()
+		oSel = oSelections.getByIndex(lWhichSelection)
+		text = oSel.getString()
+		
+		newDocument = StarDesktop.loadComponentFromURL(NEW_WRITER_DOC_URL, "_blank", 0, Array() )
+		newDocumentFrame = ThisComponent.CurrentController.Frame
+ 
+		title = InputBox("Enter the topic title") 
+		
+		dim args1(0) as new com.sun.star.beans.PropertyValue
+		args1(0).Name = "Text"
+		args1(0).Value = "<formalpara><title>" + title + "</title><para><programlisting language=""XML""><![CDATA[" + text + "]]></programlisting></para></formalpara>"
+		
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:InsertText", "", 0, args1())
+		
+		rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:SelectAll", "", 0, Array())
+		
+		rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:Copy", "", 0, Array())
+		
+		newDocument.close(True)
+end sub
+ 
+sub createJavaListing
+		dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+		sourceDocument = ThisComponent
+		document = sourceDocument.CurrentController.Frame
+		
+		'Get the ViewCursor of the current document 
+		oSelections = ThisComponent.getCurrentSelection()
+		oSel = oSelections.getByIndex(lWhichSelection)
+		text = oSel.getString()
+		
+		newDocument = StarDesktop.loadComponentFromURL(NEW_WRITER_DOC_URL, "_blank", 0, Array() )
+		newDocumentFrame = ThisComponent.CurrentController.Frame
+ 
+		title = InputBox("Enter the topic title") 
+		
+		dim args1(0) as new com.sun.star.beans.PropertyValue
+		args1(0).Name = "Text"
+		args1(0).Value = "<formalpara><title>" + title + "</title><para><programlisting language=""Java""><![CDATA[" + text + "]]></programlisting></para></formalpara>"
+		
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:InsertText", "", 0, args1())
+		
+				rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:SelectAll", "", 0, Array())
+		
+		rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:Copy", "", 0, Array())
+		
+		newDocument.close(True)
+end sub
+ 
+sub createGenericListing
+		dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+		sourceDocument = ThisComponent
+		document = sourceDocument.CurrentController.Frame
+		
+		'Get the ViewCursor of the current document 
+		oSelections = ThisComponent.getCurrentSelection()
+		oSel = oSelections.getByIndex(lWhichSelection)
+		text = oSel.getString()
+		
+		newDocument = StarDesktop.loadComponentFromURL(NEW_WRITER_DOC_URL, "_blank", 0, Array() )
+		newDocumentFrame = ThisComponent.CurrentController.Frame
+ 
+		title = InputBox("Enter the topic title") 
+		
+		dim args1(0) as new com.sun.star.beans.PropertyValue
+		args1(0).Name = "Text"
+		args1(0).Value = "<formalpara><title>" + title + "</title><para><programlisting><![CDATA[" + text + "]]></programlisting></para></formalpara>"
+		
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:InsertText", "", 0, args1())
+		
+				rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:SelectAll", "", 0, Array())
+		
+		rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:Copy", "", 0, Array())
+		
+		newDocument.close(True)
+end sub
+ 
+sub createScreenListing
+		dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+		sourceDocument = ThisComponent
+		document = sourceDocument.CurrentController.Frame
+		
+		'Get the ViewCursor of the current document 
+		oSelections = ThisComponent.getCurrentSelection()
+		oSel = oSelections.getByIndex(lWhichSelection)
+		text = oSel.getString()
+		
+		newDocument = StarDesktop.loadComponentFromURL(NEW_WRITER_DOC_URL, "_blank", 0, Array() )
+		newDocumentFrame = ThisComponent.CurrentController.Frame
+ 
+		title = InputBox("Enter the topic title") 
+		
+		dim args1(0) as new com.sun.star.beans.PropertyValue
+		args1(0).Name = "Text"
+		args1(0).Value = "<formalpara><title>" + title + "</title><para><screen>" + text + "</screen></para></formalpara>"
+		
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:InsertText", "", 0, args1())
+		
+				rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:SelectAll", "", 0, Array())
+		
+		rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:Copy", "", 0, Array())
+		
+		newDocument.close(True)
+end sub
+ 
+sub createProgramListing
+		dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+		sourceDocument = ThisComponent
+		document = sourceDocument.CurrentController.Frame
+		
+		'Get the ViewCursor of the current document 
+		oSelections = ThisComponent.getCurrentSelection()
+		oSel = oSelections.getByIndex(lWhichSelection)
+		text = oSel.getString()
+		
+		newDocument = StarDesktop.loadComponentFromURL(NEW_WRITER_DOC_URL, "_blank", 0, Array() )
+		newDocumentFrame = ThisComponent.CurrentController.Frame
+		
+		dim args1(0) as new com.sun.star.beans.PropertyValue
+		args1(0).Name = "Text"
+		args1(0).Value = "<programlisting><![CDATA[" + text + "]]></programlisting>"
+		
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:InsertText", "", 0, args1())
+		
+				rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:SelectAll", "", 0, Array())
+		
+		rem ----------------------------------------------------------------------
+		dispatcher.executeDispatch(newDocumentFrame, ".uno:Copy", "", 0, Array())
+		
+		newDocument.close(True)
+end sub
+ 
+sub CreateTopic
+ 
+	const INITIAL_OUTPUT as string = "file:///tmp/docbooktopic.xml"
+	const INITIAL_OUTPUT_AS_PATH = "/tmp/docbooktopic.xml"
+ 
+	const RESULT_FILE as string = "/tmp/result.tmp"
+	const CONTENT_SPEC as string = "/tmp/book.spec"
+	 
+	dim document as object
+	dim newDocument as object
+	dim dispatcher as object
+	dim fixedFileOutput as string
+	' The title to apply to the uploaded topic
+	dim title as string
+	dim itemizedList as boolean
+	dim stripNonAscii as boolean
+	dim removelinks as boolean
+	dim removeanchor as boolean
+	
+'	title = InputBox("Enter the topic title")
+	
+	dialog = DisplayDialog("Standard", "TopicCreateDialog")
+    dialog.execute()
+     
+	title = dialog.getControl("TopicTitle").getText()
+	itemizedList = dialog.getControl("ConvertList").getState()
+	stripNonAscii = dialog.getControl("StripCharacters").getState()
+	removelinks =  dialog.getControl("RemoveLinks").getState()
+	removeanchor =  dialog.getControl("RemoveAnchor").getState()
+		 
+	if len(title) = 0 then exit sub
+	 
+	dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+	sourceDocument = ThisComponent
+	document = sourceDocument.CurrentController.Frame
+	newDocument = StarDesktop.loadComponentFromURL(NEW_WRITER_DOC_URL, "_blank", 0, Array() )
+	newDocumentFrame = ThisComponent.CurrentController.Frame
+	dispatcher.executeDispatch(document, ".uno:Copy", "", 0, Array())
+	dispatcher.executeDispatch(newDocumentFrame, ".uno:Paste", "", 0, Array())
+	dim args1(1) as new com.sun.star.beans.PropertyValue
+	args1(0).Name = "URL"
+	args1(0).Value = INITIAL_OUTPUT
+	args1(1).Name = "FilterName"
+	args1(1).Value = "DocBook File"
+	dispatcher.executeDispatch(newDocumentFrame, ".uno:SaveAs", "", 0, args1())
+	newDocument.close(True)
+	f1 = FreeFile()
+	Open INITIAL_OUTPUT_AS_PATH for Input as #f1
+	' Here we want to extract lines 4 to (line count - 1). this strips out the
+	' XML preamble, the initial <article> element, and the </article> closing element
+	dim line as integer
+	dim lastLine as string
+	line = 0
+	Do while NOT EOF(f1)
+		Line Input #f1, s
+		if line > 3 then
+		fixedFileOutput = fixedFileOutput + lastLine + Chr(13)
+		end if
+		lastLine = s
+		line = line + 1
+	Loop
+	Close #f1
+	' Fix the docbook
+	fixedFileOutput = "<section>" + fixedFileOutput + "</section>"
+	
+	' replace orderedlist with itemized list
+	if itemizedList then
+		fixedFileOutput = replace(fixedFileOutput, "<orderedlist>", "<itemizedlist>")
+		fixedFileOutput = replace(fixedFileOutput, "</orderedlist>", "</itemizedlist>")
+	end if
+	
+	if stripNonAscii then
+		dim asciiFixedFile as String
+		for i = 1 to len(fixedFileOutput)
+			char = mid(fixedFileOutput, i, 1)
+			if asc(char) <= 127 then
+				asciiFixedFile = asciiFixedFile + char 
+			end if
+		next i
+		fixedFileOutput = asciiFixedFile	
+	end if
+	
+	if removelinks then 
+		fixedFileOutput = RemoveStartAndEndElement(fixedFileOutput, "link")
+	end if
+	if removeanchor then 
+		fixedFileOutput = RemoveStartAndEndElement(fixedFileOutput, "anchor")
+	end if
+	 
+	' loadComponentFromURL to post to a JSONP endpoint
+	title = replace(title, "\", "\\")
+	title = replace(title, Chr(13), "\n")
+	title = replace(title, Chr(9), "\t")
+	title = replace(title, """", "\""")
+	 
+	fixedFileOutput = replace(fixedFileOutput, "\", "\\")
+	fixedFileOutput = replace(fixedFileOutput, Chr(13), "\n")
+	fixedFileOutput = replace(fixedFileOutput, Chr(9), "\t")
+	fixedFileOutput = replace(fixedFileOutput, """", "\""")
+	 
+	'data = URLEncode("{""configuredParameters"":[""xml"",""title""],""xml"":""" + fixedFileOutput + """,""title"":""" + title + """}", false)
+	'url = "http://skynet-dev.usersys.redhat.com:8080/TopicIndex/seam/resource/rest/1/topic/create/jsonp?expand=&data=" + data + "&callback=callback"
+	 
+	data = "{""configuredParameters"":[""xml"",""title""],""xml"":""" + fixedFileOutput + """,""title"":""" + title + """}"
+	fixedData = replace(data, "\", "\\")
+	fixedData = replace(fixedData, """", "\""")
+	 
+	curlCommand = "curl --silent --header ""Content-Type: application/json"" -X POST --data """ + fixedData + """ " + REST_URL + "/1/topic/create/json | grep -oP ""\d+"" | head -n 1 > " + RESULT_FILE
+	fixedCurlCommand = replace(curlCommand, "'", "&apos;")
+	fixedCurlCommand = replace(fixedCurlCommand, "$", "\$")
+	bashCommand = "bash -c '" + fixedCurlCommand + "'"
+	 
+	' create the topic
+	'newTopic = StarDesktop.loadComponentFromURL(url, "_blank", 0, Array() )
+	Shell(bashCommand, 2, "", true)
+	 
+	Open RESULT_FILE for Input as #f1
+	 
+	Do while NOT EOF(f1)
+		Line Input #f1, s
+		topicId = cint(s)
+	Loop
+	Close #f1
+	 
+	Open CONTENT_SPEC for Append as #f1
+	Print #f1, "  " + title + " [" + topicId + "]"
+	Close #f1
+	 
+	' Create a comment
+	comment = sourceDocument.createInstance("com.sun.star.text.TextField.Annotation")
+	With comment
+		'.Author = "Me"
+		.Content = "Topic ID " + topicId
+		'.Date = oDate 'Ommit the date and it defaults to today!
+	End With
+	oCurs = sourceDocument.getText().createTextCursor()
+	oCurs.gotoRange(sourceDocument.CurrentController.ViewCursor, False)
+	sourceDocument.getText().insertTextContent(oCurs, comment, False)
+	' set the background to yellow for the selected text
+	dim args2(0) as new com.sun.star.beans.PropertyValue
+	args2(0).Name = "BackgroundColor"
+	args2(0).Value = 16776960
+	dispatcher.executeDispatch(document, ".uno:BackgroundColor", "", 0, args2())
+	
+	CopyToClipboard(topicId)
+end sub
+ 
+sub createOrderedListWithTitle
+ 
+	const INITIAL_OUTPUT as string = "file:///tmp/docbooktopic.xml"
+	const INITIAL_OUTPUT_AS_PATH = "/tmp/docbooktopic.xml"
+	const NEW_WRITER_DOC_URL = "private:factory/swriter"
+	 
+	dim document as object
+	dim newDocument as object
+	dim dispatcher as object
+	dim fixedFileOutput as string
+	' The title to apply to the uploaded topic
+	dim title as string
+	
+	title = InputBox("Enter the topic title")
+	 
+	if len(title) = 0 then exit sub
+	 
+	dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+	sourceDocument = ThisComponent
+	document = sourceDocument.CurrentController.Frame
+	newDocument = StarDesktop.loadComponentFromURL(NEW_WRITER_DOC_URL, "_blank", 0, Array() )
+	newDocumentFrame = ThisComponent.CurrentController.Frame
+	dispatcher.executeDispatch(document, ".uno:Copy", "", 0, Array())
+	dispatcher.executeDispatch(newDocumentFrame, ".uno:Paste", "", 0, Array())
+	dim args1(1) as new com.sun.star.beans.PropertyValue
+	args1(0).Name = "URL"
+	args1(0).Value = INITIAL_OUTPUT
+	args1(1).Name = "FilterName"
+	args1(1).Value = "DocBook File"
+	dispatcher.executeDispatch(newDocumentFrame, ".uno:SaveAs", "", 0, args1())
+	newDocument.close(True)
+	f1 = FreeFile()
+	Open INITIAL_OUTPUT_AS_PATH for Input as #f1
+	' Here we want to extract lines 4 to (line count - 1). this strips out the
+	' XML preamble, the initial <article> element, and the </article> closing element
+	dim line as integer
+	dim lastLine as string
+	line = 0
+	Do while NOT EOF(f1)
+		Line Input #f1, s
+		if line > 3 then
+		fixedFileOutput = fixedFileOutput + lastLine + Chr(13)
+		end if
+		lastLine = s
+		line = line + 1
+	Loop
+	Close #f1
+	
+	fixedFileOutput = "<formalpara><title>" + title + "</title><para>" + fixedFileOutput + "</para></formalpara>"
+	CopyToClipBoard(fixedFileOutput)
+ 
+end sub
+ 
+function RemoveStartAndEndElement(source as String, element as String) as String
+	RemoveStartAndEndElement = RemoveElement(source, element, false)
+	RemoveStartAndEndElement = RemoveElement(RemoveStartAndEndElement, element, true)
+end function
+ 
+function RemoveElement(source as String, element as String, endElement as boolean) as String
+	
+	RemoveElement = source
+	
+	startElement = "<"
+	if endElement then startElement = startElement + "/"
+	startElement = startElement + element
+	
+	do while not (instr(RemoveElement, startElement) = 0)
+		index = instr(RemoveElement, startElement)
+		endindex = instr(index + len(startElement), RemoveElement, ">")
+		leftString = left(RemoveElement, index -1)
+		rightString = right(RemoveElement, len(RemoveElement) - endindex)
+		RemoveElement = leftString + rightString
+	loop
+	
+	
+end function
+ 
+function DisplayDialog(library as string, dialog as String) As Object
+      Dim oLibContainer As Object, oLib As Object
+      Dim oInputStreamProvider As Object
+      Dim oDialog As Object
+      ' library container
+      oLibContainer = DialogLibraries
+      ' load the library
+      oLibContainer.loadLibrary( library )
+      ' get library
+      oLib = oLibContainer.getByName( library )
+      ' get input stream provider
+      oInputStreamProvider = oLib.getByName( dialog )
+      ' create dialog control
+      oDialog = CreateUnoDialog( oInputStreamProvider )
+      ' return the dialog
+      DisplayDialog = oDialog
+end function
+ 
+sub AddChapter
+	const CONTENT_SPEC as string = "/tmp/book.spec"
+	 
+	title = InputBox("Please enter a title for the chapter")
+	contentSpecHandle = FreeFile()
+	Open CONTENT_SPEC for Append as #contentSpecHandle
+	Print #contentSpecHandle, "Chapter: " + title
+	Close #contentSpecHandle
+end sub
+ 
+sub CreateBareMediaObject
+	id = InputBox("Please enter a title for the chapter")
+		CopyToClipBoard("<mediaobject><imageobject><imagedata align=""center"" fileref=""images/" + id + ".png""/></imageobject></mediaobject>")
+end sub
+ 
+sub copyBlueIO
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1998.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreenIO
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1999.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyRedOff
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2000.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyRedSquare
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2002.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreenSquareWiteArrows
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2001.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreenArrows
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2003.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyHeartrate
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1994.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyStreaks
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1995.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyClipboard
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1993.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyThreeTris
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1946.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyClipboardMagGlass
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1944.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyClipboardGreenTick
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1942.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGoldShield
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1941.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyWrenchScrewdriver
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1846.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGear
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1847.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyPlus
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1848.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyPencil
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1851.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTick
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1852.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyCopy
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1859.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBin
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1861.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBlueDiamonPlus
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1862.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBlueDiamonPencil
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1875.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+ 
+sub copyGreyTick
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1863.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyRightArrow
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1876.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyDoubleLeftArrow
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1877.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyLeftArrow
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1878.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyStarPencil
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1880.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreenManPencil
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1881.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyA
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1883.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyS
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1884.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyUndo
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1899.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyRedo
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1900.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyAnd
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1901.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyOr
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1902.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyNot
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1903.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyCross
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1903.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyShieldQMark
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1947.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGoldShieldGreenTick
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/1952.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyOrangePause
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2004.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBlueScreenGreenArrow
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2006.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreenRecycle
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2007.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyStopwatch
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2008.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGoldStopwatch
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2010.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyRedCross
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2009.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTwoGreenLeftArrows
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2012.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyFourEmptySquares
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2020.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTwoEmptySquaresAndLines
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2021.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyFourHorizontalLines
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2022.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTwoVerticalBoxes
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2023.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyFourVerticalLines
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2024.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyPlusMinus
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2025.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTwoHorizontalBoxes
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2026.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyLargeTree
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2027.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copySmallTree
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2028.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyCylinderGreenArrayFile
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2043.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyServerMagGlass
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2049.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBlueScreenMagGlass
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2055.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyUpBlueArrow
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2097.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyDownBlueArrow
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2098.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreenArrowRight
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2102.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyFunnel
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2104.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyFunnelMultiple
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2105.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyCircleArrow
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2106.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyWhiteDownArrowGreyBox
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2107.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyQCylindar
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2114.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyScanner
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2119.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyDownGreyArrowHorizLine
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2125.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyTxt
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2132.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyCSV
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2133.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyPDF
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2134.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyMag
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2135.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyQBoxPencil
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2146.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+ 
+sub copyBlueMag
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2147.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTwoOverlappingCircles
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2148.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBlueTick
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2150.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBlueCross
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2151.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyEyeDropper
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2152.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreenArrowMan
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2155.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyQBin
+	CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2157.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyTag
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2158.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyScreenBelt
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2163.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBlueTriangle
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2177.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTwoOverlappingCireclesFilled
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2178.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTwoOverlappingCireclesOuterFilled
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2204.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyMagWithPlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2251.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyMagWithMinus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2252.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyPlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2259.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyXLightGreyBackground
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2260.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyPlusLightGreyBackground
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2261.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyFloppyLightGreyBackground
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2262.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyUpArrowLightGreyBackground
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2263.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyDownArrowLightGreyBackground
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2264.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyStopwatchPlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2276.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyPieChart
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2284.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyPieChartHorizontalLines
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2285.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyPage
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2286.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyDownArrow
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2289.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyUpArrow
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2290.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyUpArrowHorizLine
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2305.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreyDownArrowHorizLine
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2306.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyTwoGreenPeople
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2339.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyGreenUpArrow
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2340.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyPagePlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2345.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyThreeYellowLinesGreyBoxGreenPlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2360.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyPageGreenPlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2361.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyFolderPlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2364.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBoxPlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2365.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyThickPlus
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2366.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyThickRedDash
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2367.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyCylindarGreenArrowToFile
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2371.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+sub copyBlueRightArrow
+CopyToClipBoard("<inlinemediaobject><imageobject><imagedata fileref=""images/2372.png""/></imageobject></inlinemediaobject>")
+end sub
+ 
+Sub CopyToClipBoard( sText ) 
+  ' create SystemClipboard instance 
+  oClip = CreateUnoService( _ 
+      "com.sun.star.datatransfer.clipboard.SystemClipboard") 
+  oTR = createUnoListener("Tr_", _ 
+      "com.sun.star.datatransfer.XTransferable") 
+  ' set data 
+  oClip.setContents(oTR,Null) 
+  sTxtCString = sText 
+  'oClip.flushClipboard() ' does not work 
+End Sub 
+  
+Function Tr_getTransferData( _ 
+    aFlavor as com.sun.star.datatransfer.DataFlavor) 
+  If (aFlavor.MimeType = "text/plain;charset=utf-16") Then 
+    Tr_getTransferData() = sTxtCString 
+  End If 
+End Function 
+  
+Function Tr_getTransferDataFlavors() 
+  Dim aFlavor As new com.sun.star.datatransfer.DataFlavor 
+  aFlavor.MimeType = "text/plain;charset=utf-16" 
+  aFlavor.HumanPresentableName = "Unicode-Text" 
+  Tr_getTransferDataFlavors() = array(aFlavor) 
+End Function 
+  
+Function Tr_isDataFlavorSupported( _ 
+    aFlavor as com.sun.star.datatransfer.DataFlavor) as Boolean 
+  If aFlavor.MimeType = "text/plain;charset=utf-16" Then 
+    Tr_isDataFlavorSupported = true 
+  Else 
+    Tr_isDataFlavorSupported = false 
+  End If 
+End Function
+ 
+sub UploadImage
+	UploadImageCommon(false)
+end sub 
+ 
+sub UploadInlineImage
+	UploadImageCommon(true)
+end sub 
+ 
+sub UploadImageCommon(inline as Boolean)
+	const RESULT_FILE as string = "/tmp/result.tmp"
+	const tmpImgLoc = "/tmp/img1.png"
+	const tmpJSONLoc = "/tmp/img.json"
+	const sTextContent as string = "com.sun.star.text.TextContent"
+	
+	dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+	
+	dialog = DisplayDialog("Standard", "PleaseWait")
+	dialog.setVisible(true)
+	
+	oDoc = ThisComponent
+	oController = oDoc.CurrentController
+	oFrame = oController.Frame	
+	
+	newDocument = StarDesktop.loadComponentFromURL(NEW_WRITER_DOC_URL, "_blank", 0, Array() )
+	
+	dialog.toFront()
+	
+	newDocumentFrame = newDocument.CurrentController.Frame
+	dispatcher.executeDispatch(oFrame, ".uno:Copy", "", 0, Array())
+	dispatcher.executeDispatch(newDocumentFrame, ".uno:Paste", "", 0, Array())
+	
+	'oPic = oDoc.CurrentSelection
+	oPic = null
+	oCursor = newDocument.Text.createTextCursor()
+	oCursor.gotoStart(False)
+	oCursor.gotoEnd(True)
+	
+	
+	
+	oEnum = oCursor.createContentEnumeration(sTextContent)
+	Do While oEnum.hasMoreElements()
+	  oSection = oEnum.nextElement()
+	  if oSection.ImplementationName = "SwXTextGraphicObject" then
+	  	oPic = oSection
+	  	exit do
+	  end if
+	  'Print "Enumerating TextContent: " & oSection.ImplementationName
+	Loop
+ 
+	if oPic = null then
+		MsgBox("Something went wrong")
+	else
+		gProvider = createUnoService("com.sun.star.graphic.GraphicProvider")
+	
+		Dim bArgs(1) as new com.sun.star.beans.PropertyValue
+	
+	 	bArgs(0).Name = "URL"
+		bArgs(0).Value = ConvertToURL(tmpImgLoc)
+		bArgs(1).Name = "MimeType"
+		bArgs(1).Value = "image/png"
+		gProvider.storeGraphic(oPic.Graphic,bArgs)
+	
+	 	oSFA = CreateUnoService("com.sun.star.ucb.SimpleFileAccess")
+	  
+	  	inputTextStream = CreateUnoService("com.sun.star.io.DataInputStream")  	
+	  	inputStream = oSFA.openFileRead(tmpImgLoc)
+	  	inputTextStream.setInputStream(inputStream)
+	
+	  	length = inputStream.Length
+	  	
+	  	dim byteArray(length) as byte
+	  	byteArrayLength = inputTextStream.readBytes(byteArray, length)
+	  	
+	  	inputTextStream.closeInput()
+	  	
+	  	outputTextStream = CreateUnoService("com.sun.star.io.TextOutputStream")
+	  	
+	  	'If the file already exists, delete it.
+		If oSFA.exists(tmpJSONLoc) Then
+			oSFA.kill(tmpJSONLoc)
+		End If
+		
+		outputStream = oSFA.openFileWrite(tmpJSONLoc)
+		outputTextStream.setOutputStream(outputStream)
+		
+		outputTextStream.writeString( _
+		"{" + _
+			"""description"":""rhautomate image""," + _
+	  		"""languageImages_OTM"":{" + _
+				"""items"":[" + _
+					"{" + _
+			            """item"":{" + _
+			               """imageData"":[")
+	
+		lower = lbound(byteArray)
+		upper = ubound(byteArray)
+		
+		' Take this if out of the for loop
+		if upper > lower then
+			outputTextStream.writeString(byteArray(lower))
+		end if
+		
+		for byteIndex = lower + 1 to upper
+			outputTextStream.writeString(",")
+			outputTextStream.writeString(byteArray(byteIndex))
+		next byteIndex
+		
+		outputTextStream.writeString( _
+		"]," + _
+			               """locale"":""en-US""," + _
+			               """filename"":""rhsettingandpos.png""," + _
+			               """configuredParameters"":[" + _
+			                  """locale""," + _
+			                  """imageData""," + _
+			                  """filename""" + _
+			               "]" + _
+			            "}," + _
+			            """state"":1" + _
+					"}" + _
+				"]" + _
+			"}," + _
+			"""configuredParameters"":[" + _
+				"""description""," + _
+				"""languageImages""" + _
+			"]" + _
+		"}")
+		
+		outputTextStream.closeOutput()
+		
+		curlCommand = "curl --silent --header ""Content-Type: application/json"" -X POST --data @" + tmpJSONLoc + " " + REST_URL + "/1/image/create/json | grep -oP ""\d+"" | head -n 1 > " + RESULT_FILE
+		fixedCurlCommand = replace(curlCommand, "'", "&apos;")
+		fixedCurlCommand = replace(curlCommand, "$", "\$")
+		bashCommand = "bash -c '" + fixedCurlCommand + "'"
+		 
+		' create the topic
+		Shell(bashCommand, 2, "", true)
+		
+		f1 = FreeFile()
+		Open RESULT_FILE for Input as #f1
+		 
+		Do while NOT EOF(f1)
+			Line Input #f1, s
+			imageId = cint(s)
+		Loop
+		Close #f1
+		
+		' Create a comment
+		MoveOffImage(oFrame)
+		comment = oDoc.createInstance("com.sun.star.text.TextField.Annotation")
+		With comment
+			.Content = "Image ID " + imageId
+		End With
+		'oCurs = oDoc.getText().createTextCursor()
+		'oCurs.gotoRange(oController.ViewCursor, False)
+		oCurs = oController.getViewCursor()
+		oCurs.getText().insertTextContent(oCurs, comment, False)
+		if inline then
+			CopyToClipBoard("sub copyImage" + Chr(13) + "CopyToClipBoard(""<inlinemediaobject><imageobject><imagedata fileref=""""images/" + imageId + ".png""""/></imageobject></inlinemediaobject>"")" + Chr(13) + "end sub")		
+		else
+			CopyToClipBoard("<mediaobject><imageobject><imagedata align=""center"" fileref=""images/" + imageId + ".png""/></imageobject></mediaobject>")
+		end if
+	end if
+	
+	newDocument.close(True)
+	dialog.setVisible(false)
+end sub
+ 
+ 
+sub MoveOffImage(oFrame)
+rem ----------------------------------------------------------------------
+rem define variables
+dim document   as object
+dim dispatcher as object
+rem ----------------------------------------------------------------------
+ 
+dispatcher = createUnoService("com.sun.star.frame.DispatchHelper")
+ 
+rem ----------------------------------------------------------------------
+dim args1(18) as new com.sun.star.beans.PropertyValue
+args1(0).Name = "SearchItem.StyleFamily"
+args1(0).Value = 2
+args1(1).Name = "SearchItem.CellType"
+args1(1).Value = 0
+args1(2).Name = "SearchItem.RowDirection"
+args1(2).Value = true
+args1(3).Name = "SearchItem.AllTables"
+args1(3).Value = false
+args1(4).Name = "SearchItem.Backward"
+args1(4).Value = false
+args1(5).Name = "SearchItem.Pattern"
+args1(5).Value = false
+args1(6).Name = "SearchItem.Content"
+args1(6).Value = false
+args1(7).Name = "SearchItem.AsianOptions"
+args1(7).Value = false
+args1(8).Name = "SearchItem.AlgorithmType"
+args1(8).Value = 1
+args1(9).Name = "SearchItem.SearchFlags"
+args1(9).Value = 0
+args1(10).Name = "SearchItem.SearchString"
+args1(10).Value = "."
+args1(11).Name = "SearchItem.ReplaceString"
+args1(11).Value = ""
+args1(12).Name = "SearchItem.Locale"
+args1(12).Value = 255
+args1(13).Name = "SearchItem.ChangedChars"
+args1(13).Value = 2
+args1(14).Name = "SearchItem.DeletedChars"
+args1(14).Value = 2
+args1(15).Name = "SearchItem.InsertedChars"
+args1(15).Value = 2
+args1(16).Name = "SearchItem.TransliterateFlags"
+args1(16).Value = 1280
+args1(17).Name = "SearchItem.Command"
+args1(17).Value = 0
+args1(18).Name = "Quiet"
+args1(18).Value = true
+ 
+dispatcher.executeDispatch(oFrame, ".uno:ExecuteSearch", "", 0, args1())
+ 
+ 
+end sub
