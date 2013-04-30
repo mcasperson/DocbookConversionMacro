@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE dlg:window PUBLIC "-//OpenOffice.org//DTD OfficeDocument 1.0//EN" "dialog.dtd">
+<dlg:window xmlns:dlg="http://openoffice.org/2000/dialog" xmlns:script="http://openoffice.org/2000/script" dlg:id="PleaseWait" dlg:left="313" dlg:top="133" dlg:width="164" dlg:height="148" dlg:closeable="true" dlg:moveable="true">
+ <dlg:bulletinboard>
+  <dlg:text dlg:id="Label1" dlg:tab-index="0" dlg:left="64" dlg:top="66" dlg:width="33" dlg:height="10" dlg:value="Please Wait"/>
+ </dlg:bulletinboard>
+</dlg:window>
